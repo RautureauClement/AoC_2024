@@ -51,46 +51,11 @@ def find(cases):
                 'dir' : diff,
                 'value': case['value'] + 1 + rotate
             })
+        
     if len(next) == 0:
         return
     find(next)
-    
-def getPath(cases, set):
-    next = []
-    for n in cases:
-        if not n in set:
-            set.append(n)
-    for case in cases:
-        path = paths[case]
-        for side in path['side']:
-            if side in set:
-                continue
-            sideObj = paths[side]
-            diff = path['value'] - sideObj['value']
-            if diff < 0 and (diff != -999 or case == end):
-                continue
-            if not side in next:
-                next.append(side)
-    
-    if len(next) == 0:
-        return set
-    
-    return getPath(next, set)
-        
         
 find([{'path': start, 'dir' : (0, 1), 'value': 0}])
 
-res = getPath([end], [])
-
-map = [["#" for _ in range(size[0])] for _ in range(size[1])]
-
-for p in paths.keys():
-    map[p[0]][p[1]] = ' '
-for r in res:
-    map[r[0]][r[1]] = 'o'
-    
-    
-for line in map:
-    print("".join(line))
-    
-print(len(res))
+print(paths[end])

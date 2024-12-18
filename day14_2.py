@@ -1,5 +1,3 @@
-import time
-
 class Robot:
     size = (101, 103)
     
