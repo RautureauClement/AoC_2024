@@ -3,7 +3,7 @@ sys.setrecursionlimit(2000)
 
 size = range(71)
 end = (70, 70)
-wait = 1
+wait = 1024
 
 
 walls = []
@@ -57,29 +57,14 @@ def getPath(pos, path):
         next = (pos[0] + dir[0], pos[1] + dir[1])
         if next in cache.keys() and cache[next] + 1 == value:
            return getPath(next, path)
-       
-def printArr():
-    map = [[" " for _ in size] for _ in size]
-    for wall in walls:
-        map[wall[1]][wall[0]] = '#'
-    for p in path:
-        map[p[1]][p[0]] = 'O'
-    for line in map:
-        print("".join(line))
         
-    
 move([{
     "pos": (0, 0),
     "value": 0
 }])
 
 path = getPath(end, [])
-
-printArr()
-
 for pos in wallsFall:
-    printArr()
-    print(pos)
     walls.append(pos)
     if not pos in path:
         continue
